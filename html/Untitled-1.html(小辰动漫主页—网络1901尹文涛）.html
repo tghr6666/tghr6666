@@ -1,0 +1,277 @@
+ <!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>小辰动漫</title>
+<style type="text/css">	
+	#al{height:1200px;width: 469px;border: #004B56 ; margin:  0px;padding: 0px;}
+	.h1，.h2， {width: 239px;height: 600px;margin: 10px;padding: 10px; position: absolute ;top: 10px;left: 239px; }
+	.h1{position: absolute;top: 30px;left:550px; font:type;color:yellow}
+	.block {
+            margin: 0 auto;
+            width: 700px;
+            height: 400px;
+            position: absolute; left: 280px; 
+            overflow: hidden;
+        }
+ 
+        .block > div:nth-child(1) {
+            width: 4900px;
+            height: 400px;
+            margin-left: 0px;
+        }
+ 
+        .tranAnimate {
+            transition: margin-left 0.9s ease-in-out;
+        }
+ 
+        .block > div > img {
+            float: left;
+            width: 700px;
+            height: 400px;
+        }
+ 
+        .dian {
+            position: absolute;
+            width: 108px;
+            height: 15px;
+            bottom: 20px;
+            left: 296px;
+        }
+ 
+        .dian > div {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: white;
+            float: left;
+            margin: 0 2px;
+            border: 2px solid black;
+            box-sizing: border-box;
+        }
+	body{background:color;background: #5BD8E4}
+	#b1{width: 469px;height: 11px; padding: 20px;margin: 50px; position: absolute;top:30px;}	
+	.h3{width: 100px;height: 30px;padding: 5px;border: #0FC0A0 solid 2px;background: #A7D5B3; text-align: center; line-height: 30px;font-family:Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", "monospace" }
+	
+	#b3{width:1200px;height:500px;padding: 5px;margin: 40px;position: absolute;top: 500px; position: absolute;right: 1px; }
+	.h4{width:440px;height: 300px;padding-right: 50px;margin:90px;position: absolute;top:440px; }
+	
+	
+	
+	
+</style>	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</head>
+<body>
+<div id="al">
+	
+	
+	
+	
+	
+ <div class="h2">	<img src="file:///D|/tp/动漫素材/天气之子/logo-1.jpg" alt="" height="70"   width="1300"  />  </div>
+	 
+<div class="h1"> <form> <input/>搜索动画</form> </div>
+	<div class="block">
+    <div>
+    <img src="file:///D|/tp/48199556_p0.png" width="1500" height="995" alt=""/> 
+	<img src="file:///D|/tp/u=2861568308,2530324633&fm=26&gp=0.jpg" width="511" height="300" alt=""/>
+	<img src="file:///D|/tp/88.jpg" width="1808" height="1130" alt=""/>
+	<img src="file:///D|/tp/timg (1).jpg" width="1592" height="820" alt=""/> 
+	<img src="file:///D|/tp/timg.jpg" width="1058" height="559" alt=""/> 
+	<img src="file:///D|/tp/timg (4).jpg" width="640" height="359" alt=""/> 
+	</div>
+    <div class="dian">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+<script>
+    var btnright = document.getElementById("btnright");
+    var btnleft = document.getElementById("btnleft");
+    var bpar = document.getElementsByClassName("block")[0];
+    var dian = document.getElementsByClassName("dian")[0].children;
+    var bimage = bpar.children[0];
+    var count = 0;
+    var time;
+    dian[0].style.backgroundColor = "black";
+    window.onload = showAnimate();
+    function showAnimate() {
+        time = setInterval(function () {
+            Animate();
+        }, 1500);
+    }
+    function Animate() {
+        bimage.className = "tranAnimate";
+        dian[count].style.backgroundColor = "white";
+        count++;
+        var index = count >= bimage.children.length - 1 ? 0 : count;
+        dian[index].style.backgroundColor = "black";
+        bimage.style.marginLeft = (-700 * count) + "px";
+        //动画完成状态 0.5s
+        setTimeout(function () {
+            if (count >= bimage.children.length - 1) {
+                count = 0;
+                bimage.className = "";
+                bimage.style.marginLeft = "0px";
+            }
+        }, 500);
+    }
+    for (var i = 0; i < dian.length; i++) {
+        dian[i].index = i;
+        dian[i].onmouseenter = function () {
+            bimage.className = "tranAnimate";
+            bimage.style.marginLeft = (-700 * this.index) + "px";
+            dian[count].style.backgroundColor = "white";
+            this.style.backgroundColor = "black";
+            count = this.index;
+        }
+    }
+    bpar.onmouseenter = function () {
+        clearInterval(time);
+    }
+    bpar.onmouseleave = function () {
+        showAnimate();
+    }
+    document.addEventListener("visibilitychange", function () {
+        if (!document["hidden"]) {
+            //激活
+            showAnimate();
+        } else {
+            clearInterval(time);
+        }
+    });
+    btnright.onmouseenter = function () {
+        clearInterval(time);
+    }
+    btnright.onclick = function () {
+        Animate();
+    }
+    btnleft.onmouseenter = function () {
+        clearInterval(time);
+    }
+    btnleft.onclick = function () {
+        dian[count].style.backgroundColor = "white";
+        count--;
+        if (count < 0) {
+            bimage.className = "";
+            count = 5;
+            bimage.style.marginLeft = "-4200px";
+            setTimeout(function () {
+                bimage.className = "tranAnimate";
+                bimage.style.marginLeft = (-700 * count) + "px";
+            }, 1);
+        }
+        else {
+            bimage.className = "tranAnimate";
+            bimage.style.marginLeft = (-700 * count) + "px";
+        }
+        dian[count].style.backgroundColor = "black";
+    }
+</script>	
+</div>
+
+<div id="b1">
+<a href="（登陆界面）.html">	<div class="h3">登录</div></a>
+<a href="index.html（导航）.html">	<div class="h3">导航</div></a>
+	<div class="h3">国产动漫</div>
+	<div class="h3">日本动漫</div>
+	<div class="h3">美国动漫</div>
+	<div class="h3"> 漫画</div>
+	<div class="h3">排行</div>
+	<div class="h3">更新</div>
+	<div class="h3">cosplay</div>
+
+	</div>
+	
+	<div id="b3">
+<a href="Untitled-1.html(简介、选集).html">	<img src="file:///D|/tp/屏幕截图(132).png" width="193" height="289" alt=""/></a>
+	<img src="file:///D|/tp/屏幕截图(117).png" width="196" height="289" alt=""/>
+		
+	<img src="file:///D|/tp/屏幕截图(119).png" width="194" height="288" alt=""/>
+    
+	<img src="file:///D|/tp/屏幕截图(120).png" width="195" height="290" alt=""/>
+    
+	
+	<img src="file:///D|/tp/屏幕截图(121).png" width="195" height="287" alt=""/>
+    
+	<img src="file:///D|/tp/屏幕截图(118).png" width="190" height="287" alt=""/>
+    <img src="file:///D|/tp/屏幕截图(122).png" width="197" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(123).png" width="189" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(124).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(125).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(126).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(127).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(128).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(129).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(130).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(131).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(116).png" width="193" height="289" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(133).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(134).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(135).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(137).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(138).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(139).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(140).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(141).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(142).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(143).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(144).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(145).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(146).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(147).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(148).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(149).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(150).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(151).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(152).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(153).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(155).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(156).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(157).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(158).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(159).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(160).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(161).png" width="193" height="287" alt=""/> 
+	<img src="file:///D|/tp/屏幕截图(162).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(163).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(164).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(166).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(167).png" width="178" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(168).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(169).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(171).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(172).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(174).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(175).png" width="193" height="287" alt=""/>
+	<img src="file:///D|/tp/屏幕截图(176).png" width="193" height="287" alt=""/><br/><br/><br/><br/><br/> <P align="center">关于我们|版权责任(联系我们邮箱：1551784710@qq.com)</P></div>
+
+       
+	
+	
+	
+	
+</body>
+	
+	
+	
+	
+</html>
